@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>seminar2</title>
+</head>
+
+<body>
+    <script>
+        let userAge = prompt('Введите ваш возраст:');
+        let regexAlphabet = /^[a-zA-Zа-яА-Я]+$/;
+        let userName = prompt('Введите ваше имя:');
+
+        //проверяем на содержание
+        if (userAge !== '') {
+            //проверяем поле возраста на наличие букв
+            if (regexAlphabet.test(userAge)) {
+                alert('Вы ввели буквы! Введите ваш возраст цифрами!');
+            } else {
+                //приводим переменную возраста к числовму типу данных и исключаем отрицательные значения с помощью модуля
+                userAge = Math.abs(Number(userAge));
+                remainderDiv = userAge % 10; // задаём остаток возраста от деления на 10 для подбора окончания
+                //варьируем окончание год/года/лет в зависмости от числа и ограичиваем/допускаем вход на сайт.
+                if (userAge === 0) {
+                    alert('Ого! кто-то балуется...');
+                } else if (userAge === 1) {
+                    alert(userName + '! ' + 'Вам ' + userAge + ' год' + '. Пока рановато посещать такой сайт.');
+                } else if (userAge >= 2 && userAge <= 4) {
+                    alert(userName + '! ' + 'Вам ' + userAge + ' года' + '. Пока рановато посещать такой сайт.');
+                } else if (userAge > 5 && userAge < 18) {
+                    alert(userName + '! ' + 'Вам ' + userAge + ' лет' + '. Пока рановато посещать такой сайт.');
+                } else if (userAge >= 18) {
+                    if (remainderDiv === 1) {
+                        alert(userName + '! ' + 'Вам ' + userAge + ' год' + '. Добро пожаловать на сайт!');
+                    } else if (remainderDiv === 2 || remainderDiv === 3 || remainderDiv === 4) {
+                        alert(userName + '! ' + 'Вам ' + userAge + ' года' + '. Добро пожаловать на сайт!');
+                    } else {
+                        alert(userName + '! ' + 'Вам ' + userAge + ' лет' + '. Добро пожаловать на сайт!');
+                    }
+                }
+            }
+        } else {
+            alert('Поле пусто, повторите попытку');
+        }
+    </script>
+</body>
+
+</html>

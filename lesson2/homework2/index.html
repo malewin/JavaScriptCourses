@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeWork2</title>
+</head>
+
+<body>
+    <script>
+        //task1
+        let num1 = Number(prompt('Введите первое число:'));
+        let num2 = Number(prompt('Введите второе число'));
+        if (num1 <= 1) {
+            alert('Первое число меньше или равно 1')
+        } else {
+            alert('Первое число больше 1')
+        }
+        if (num2 >= 3) {
+            alert('Второе число больше или равно 3')
+        } else {
+            alert('Второе число меньше 3')
+        }
+
+        //task2
+        let test = true;
+        (test === true) ? (console.log('+++')) : (console.log('---'));
+
+        //task3
+        let userDay = prompt('Какое число в месяце?');
+
+        if (userDay >= 1 && userDay <= 10) {
+            alert('Введённое число в 1-ой декаде месяца.');
+        } else if (userDay >= 11 && userDay <= 20) {
+            alert('Введённое число во 2-ой декаде месяца.');
+        } else if (userDay >= 21 && userDay <= 30) {
+            alert('Введённое число в 3-ей декаде месяца.');
+        } else if (userDay == 31) { // нестрогое равенство применено намеренно
+            alert('Введённое число в 4-ой декаде месяца.');
+        } else {
+            alert('Введённое число меньше 0 или больше 31. Такого числа в месяца нет.')
+        }
+    </script>
+</body>
+
+</html>
