@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const car = {
+            make: 'Audi',
+            model: 'A5',
+            year: 2023,
+            color: 'red',
+            passengers: 2,
+            power: 249,
+            odometer: 0,
+            engineIsStarted: false,
+            startEngine: function() {
+                this.engineIsStarted = true;
+            },
+            stopEngine: function() {
+                this.engineIsStarted = false;
+            },
+            haveRoadTrip: function(distance) {
+                if (this.engineIsStarted) {
+                    this.odometer += distance;
+                } else {
+                    alert("Сначала запустите двигатель!");
+                }
+            }
+        };
+
+        const domain = {
+            name: '.ton',
+            price: 10,
+            count: 410,
+            userRegistred: false,
+            reg: function() {
+                this.userRegistred = true
+            },
+            countDomain: function() {
+                if (domain.count > 0) {
+                    console.log('Вы можете купить данный товар');
+                } else {
+                    console.log('Данный товар нельзя купить');
+                }
+            },
+            buyDomain: function() {
+                if (domain.userRegistred) {
+                    console.log('Товар в коризне');
+                } else {
+                    console.log('Вам необходимо зарегистрироваться');
+                }
+            }
+
+        };
+        console.log(Object.values(domain));
+    </script>
+</body>
+
+</html>
