@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- task1 -->
+    <div id="block">
+        <p>1</p>
+        <p>2</p>
+    </div>
+    <p class="www">text 1</p>
+    <p class="www">text 2</p>
+    <!-- task2 -->
+    <a href="#" class="link">link text html</a>
+    <img src="" alt="" class="photo" style="width: 100px;">
+    <!-- task3 -->
+    <div class="content"></div>
+    <!-- task4 -->
+    <div class="contentBtn"></div>
+    <script>
+        //task1
+        const firstHrefById = document.querySelector('#block p:first-child');
+        console.log(firstHrefById);
+        const firstHrefByClass = document.querySelector('.www:first-of-type');
+        console.log(firstHrefByClass);
+        //task2
+        const hrefEl = document.querySelector('.link');
+        hrefEl.innerHTML = 'link text js';
+        hrefEl.href = 'https://developer.mozilla.org/ru/';
+        console.log(hrefEl);
+        const imgEl = document.querySelector('.photo');
+        imgEl.src = 'https://s1.1zoom.me/big3/652/342768-sepik.jpg'
+        imgEl.alt = 'img';
+        console.log(imgEl);
+        //task3
+        const contentDiv = document.querySelector('.content');
+        const contEl = document.createElement('p');
+        contEl.innerText = 'Новый текстовый элемент';
+        contentDiv.appendChild(contEl);
+        const cloneNode = contentDiv.cloneNode(true);
+        console.log(cloneNode);
+        contEl.remove();
+        console.log(contentDiv);
+        //task4
+        const buttonBlock = document.querySelector('.contentBtn');
+        const btnEl = document.createElement('button');
+        btnEl.textContent = 'click';
+
+        buttonBlock.appendChild(btnEl);
+        console.log(buttonBlock);
+        let counter = 0;
+        //variant with 'onclick'
+        // buttonBlock.onclick = function() {
+        //     counter += 1;
+        //     btnEl.textContent = `нажато ${counter} раз`;
+        // }
+        //variant with 'ae - eventListener'
+        btnEl.addEventListener('click', function() {
+            counter += 1;
+            btnEl.textContent = `нажато ${counter} раз`;
+        });
+    </script>
+</body>
+
+</html>
