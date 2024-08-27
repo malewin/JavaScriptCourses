@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lection8</title>
+</head>
+
+<body>
+    <ul class="menu">
+        <li>list_1</li>
+        <li>list_2</li>
+        <li>list_3</li>
+    </ul>
+    <button class="btnMouseOver"> Buy</button> <br>
+
+    <a href="https://t.me/ifyes">send form</a>
+
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio in iusto facere explicabo laudantium voluptatibus animi rerum molestiae illum error. Ab suscipit voluptatum dignissimos temporibus? Excepturi aspernatur velit cum itaque.</p>
+
+    <input type="text">
+    <form action="#">
+        <input type="text" class="domain">
+        <div class="error"></div>
+        <button type="submit">SEND</button>
+    </form>
+    <script>
+        const menuUl = document.querySelector('.menu');
+        const nameFunction = (e) => {
+            console.log(e.target, e.currentTarget);
+        }
+        menuUl.addEventListener('click', nameFunction);
+
+        //load
+        window.document.addEventListener('load', function(e) {
+            console.log('все загрузилось');
+        });
+
+        document.addEventListener('DOMContentLoaded', function(e) {
+            console.log('loaded');
+        });
+
+        //mouseover
+        const buttonMouse = document.querySelector('.btnMouseOver');
+        buttonMouse.addEventListener('mouseover', function(e) {
+            console.log('Не ломайся! нажимай!');
+            let outer = document.createElement('output');
+            outer.textContent = 'не ломайся! нажимай!';
+            buttonMouse.parentElement.appendChild(outer);
+        });
+
+        buttonMouse.addEventListener('mouseleave', function(e) {
+            console.log('Ну че ты?! Денег нет?');
+            let outer = document.createElement('output');
+            outer.textContent = 'Ну че ты?! Денег нет?';
+            buttonMouse.parentElement.appendChild(outer);
+        });
+
+        //keyboard
+        window.addEventListener('keydown', function(e) {
+            console.log(e.key);
+        });
+
+        //link
+        const link = document.querySelector('a');
+
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            let outer = document.createElement('output');
+            outer.textContent = 'сначала оплати!';
+            link.parentElement.appendChild(outer);
+            console.log('сначала оплати!');
+        });
+
+        //copy
+
+        const pCopy = document.querySelector('p');
+        pCopy.addEventListener('copy', function(e) {
+            const copyText = document.getSelection().toString();
+            console.log(copyText);
+        });
+
+        //resize
+        let resizeCounter = 0;
+        window.addEventListener('resize', function(e) {
+            resizeCounter++;
+            console.log(`размер окна изменен ${resizeCounter} раз`);
+        });
+
+        //input
+
+        const inputEl = document.querySelector('input');
+
+        inputEl.addEventListener('input', function(e) {
+            if (e.target.value.length >= 6) {
+                console.log('холодно!перебор!');
+            } else {
+                console.log('теплее..');
+            }
+        });
+
+        //submit
+        const inputText = document.querySelector('input.domain');
+        const formSend = document.querySelector('form');
+        const errorEl = document.querySelector('.error');
+
+        formSend.addEventListener('submit', (event) => {
+            if (inputText.value === '') {
+                event.preventDefault();
+                errorEl.textContent = 'Сначала оплати заказ, потом отправлю';
+            }
+        });
+    </script>
+</body>
+
+</html>
