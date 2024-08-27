@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>seminar7</title>
+</head>
+
+<body>
+    <div class="block">
+
+    </div>
+
+    <div class="elem">
+        <img src="#" alt="photo">
+        <div class="content">
+            <h2 class="heading">Lorem, ipsum dolor.</h2>
+            <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae, ea!</p>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="elem">
+            <div class="info">
+                <h2 class="subtitle">Lorem, ipsum dolor.</h2>
+            </div>
+        </div>
+    </div>
+
+    <form action="#">
+        <input type="text">
+        <button class="btn">Отправить</button>
+    </form>
+
+    <script>
+        //task1
+        const block = document.querySelector('.block');
+        const blockElement = document.createElement('div');
+        blockElement.className = 'item';
+        blockElement.style.color = 'blue';
+        blockElement.style.border = '1px black solid';
+        blockElement.style.backgroundColor = '#f8f8f8';
+        blockElement.style.padding = '16px';
+        blockElement.textContent = "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem"
+        block.appendChild(blockElement);
+        block.setAttribute('class', 'item_1');
+
+        //task2
+        console.log('task2');
+        const pElem = document.querySelector('p.text');
+        console.log(pElem);
+        console.log(pElem.previousElementSibling);
+        console.log(pElem.parentElement);
+        console.log(pElem.parentElement.previousElementSibling);
+        console.log(pElem.parentElement.parentElement);
+
+        //task3
+        console.log('task3');
+        let childElem = document.querySelector('h2.subtitle');
+        while (!childElem.parentElement == false) {
+            console.log(childElem.parentElement);
+            childElem = childElem.parentElement
+        }
+
+        //task4
+
+        const btn = document.querySelector('.btn');
+        const input = document.querySelector('input');
+
+
+        btn.addEventListener('click', function() {
+            if (input.value == '') {
+                let alert = document.createElement('h2');
+                alert.textContent = 'Вы не заполнили поле ввода!';
+                alert.style.display = 'block';
+                alert.style.width = '400px'
+                alert.style.border = '1px red solid';
+                btn.parentElement.appendChild(alert);
+            } else {
+                let complete = document.createElement('h2');
+                complete.textContent = 'Все отправлено!';
+                complete.style.display = 'block';
+                complete.style.width = '300px'
+                complete.style.border = '1px green solid';
+                btn.parentElement.appendChild(complete);
+            }
+        })
+    </script>
+</body>
+
+</html>
