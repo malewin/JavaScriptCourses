@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seminar 8</title>
+    <style>
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content"></div>
+    <script>
+        //task1
+        const contDiv = document.querySelector('.content');
+        const btnEl = document.createElement('button');
+        btnEl.textContent = 'click';
+        contDiv.appendChild(btnEl);
+        window.addEventListener('load', () => {
+            console.log('Страница загрузилась');
+        });
+        btnEl.onclick = () => {
+            console.log('событие onclick');
+        }
+        btnEl.addEventListener('click', () => {
+            console.log('событие addEventListener');
+        });
+        //task2
+        const btnEl1 = document.createElement('button');
+        const btnEl2 = document.createElement('button');
+        const btnEl3 = document.createElement('button');
+        btnEl1.textContent = 'btn1';
+        btnEl2.textContent = 'btn2';
+        btnEl3.textContent = 'btn3';
+        contDiv.appendChild(btnEl1);
+        contDiv.appendChild(btnEl2);
+        contDiv.appendChild(btnEl3);
+
+        const btlDetector = document.querySelectorAll('button');
+        btlDetector.forEach(element => {
+            element.addEventListener('click', () => {
+                console.log(element);
+            });
+        });
+
+        const btnEl4 = document.createElement('button');
+        btnEl4.textContent = '4';
+        contDiv.appendChild(btnEl4);
+        let btn4clickCounter = 0;
+        btnEl4.addEventListener('click', () => {
+            btn4clickCounter++;
+            console.log(btn4clickCounter);
+        });
+
+        const btnEl5 = document.createElement('button');
+        btnEl5.textContent = '5';
+        contDiv.appendChild(btnEl5);
+        btnEl5.addEventListener('click', () => {
+            btnEl5.textContent = 'Вы нажали на эту кнопку';
+        });
+
+        //task3
+        const btnEl6 = document.createElement('button');
+        btnEl6.textContent = 'добавить заголовок';
+        contDiv.appendChild(btnEl6);
+        btnEl6.addEventListener('click', function(e) {
+            const headerByClickBtn = document.createElement('h1');
+            headerByClickBtn.textContent = 'Новый заголовок';
+            headerByClickBtn.id = 'h1byBtn';
+            btnEl6.parentElement.appendChild(headerByClickBtn);
+        });
+
+        const btnEl7 = document.createElement('button');
+        btnEl7.textContent = 'удалить заголовок';
+        contDiv.appendChild(btnEl7);
+        btnEl7.addEventListener('click', () => {
+            btnEl7.parentElement.removeChild(document.getElementById('h1byBtn'));
+        });
+
+        const btnEl8 = document.createElement('button');
+        btnEl8.textContent = 'наведи на меня';
+        contDiv.appendChild(btnEl8);
+        btnEl8.addEventListener('mouseover', () => {
+            console.log('Вы навели на данную кнопку');
+        });
+        btnEl8.addEventListener('mouseleave', () => {
+            console.log('Наведения на кнопку больше нет');
+        });
+
+        //task4
+        const ulElem = document.createElement('ul');
+        contDiv.appendChild(ulElem);
+        const btnAddLi = document.createElement('button');
+        btnAddLi.textContent = 'добавить элемент списка';
+        contDiv.appendChild(btnAddLi);
+        let liNumerator = 1;
+        btnAddLi.addEventListener('click', () => {
+            const liElem = document.createElement('li');
+            liElem.textContent = `новый элемент списка ${liNumerator}`;
+            ulElem.appendChild(liElem);
+            liNumerator++;
+        });
+        const btnDeleteFirstLi = document.createElement('button');
+        btnDeleteFirstLi.textContent = 'Удалить первый элемент списка';
+        contDiv.appendChild(btnDeleteFirstLi);
+        btnDeleteFirstLi.addEventListener('click', () => {
+            let firstLi = ulElem.firstChild;
+            firstLi.remove();
+        });
+
+        const btnByselfClass = document.createElement('button');
+        btnByselfClass.textContent = 'добавь мне класс';
+        contDiv.appendChild(btnByselfClass);
+        btnByselfClass.addEventListener('click', () => {
+            btnByselfClass.classList.add('click');
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homework 8</title>
+</head>
+
+<body>
+    <p class="super_element">Привет</p>
+
+    <img src="https://placeimg.com/50/50/animals" alt="">
+    <img src="https://placeimg.com/50/50/arch" alt="">
+    <img src="https://placeimg.com/50/50/nature" alt="">
+    <img src="https://placeimg.com/50/50/people" alt="">
+    <img src="https://placeimg.com/50/50/tech" alt="">
+    <img src="https://placeimg.com/50/50/tech/grayscale" alt="">
+    <img src="https://placeimg.com/50/50/tech/sepia" alt="">
+
+    <br>
+
+    <button>Кнопка</button>
+    <button class="super_element">Кнопка с классом btn</button>
+    <button>Кнопка</button>
+
+    <br>
+
+    <textarea></textarea>
+
+    <br>
+
+    <ul>
+        <li>
+            <button>Кнопка 1</button>
+        </li>
+        <li>
+            <button>Кнопка 2</button>
+        </li>
+        <li>
+            <button>Кнопка 3</button>
+        </li>
+        <li>
+            <button>Кнопка 4</button>
+        </li>
+    </ul>
+    <script>
+        // 1. Необходимо вывести сообщение в консоль "все теги прогрузились", когда все теги будут созданы браузером.
+
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('Все теги прогрузились');
+        });
+
+        // 2. Необходимо вывести сообщение в консоль "страница загрузилась", когда все ресурсы страницы будут загружены.
+
+        window.addEventListener('load', () => {
+            console.log('страница загрузилась');
+        });
+
+
+        // 3. При клике на какой - либо тег на странице в консоль должно выводиться сообщение наподобие:
+        //     -Класс "super_element"
+        //     присутствует в элементе "div". -
+        //     сообщение должно определять присутствует или отсутствует класс "super_element" -
+        //     у элемента, а также выводить в нижнем регистре верный тег в данной строке, по -
+        //     которому был совершен клик. -
+        //     Необходимо использовать делегирование.
+
+        document.addEventListener('click', function(e) {
+            const target = e.target;
+            const tagLower = target.tagName.toLowerCase();
+            const hasClass = target.classList.contains('super_element');
+            if (hasClass) {
+                console.log(`Класс "super_element" присутствует в элементе ${tagLower}`);
+            } else {
+                console.log(`Класс "super_element" отсутствует в элементе ${tagLower}`);
+            }
+        });
+
+
+        // 4. Сделайте, чтобы при наведении на textarea в консоли появлялось сообщение: "Вы навели на textarea."
+
+        const focusElem = document.querySelector('textarea');
+        focusElem.addEventListener('mouseover', () => {
+            console.log(`вы навели на ${focusElem.tagName.toLowerCase()}`);
+        });
+
+        // 5. Необходимо повесить событие клика на тег ul.В обработчике события в консоль необходимо выводить текст, который записан внутри элемента кнопки, по которой был произведен клик.Если клик был не по кнопке, то ничего выводить не нужно.Необходимо использовать делегирование.
+
+        const ulElem = document.querySelector('ul');
+        ulElem.addEventListener('click', function(event) {
+            const targetBtn = event.target;
+            if (targetBtn.tagName.toLowerCase() === 'button') {
+                console.log(targetBtn.textContent);
+            }
+        });
+
+
+        // 6. Вопрос: Почему в console.log пишется сначала текст из 5 задания и только потом выводится текст из 3 задания, если мы кликаем по кнопкам в ul ? Ответ необходимо написать здесь же, под этим комментарием, своими словами.
+
+        // Я считаю что такая хронология обусловлена особенностью "Фазы всплытия", (объект СОБЫТИЯ распространяется через предков цели в обратном порядке начиная с родителя цели и заканчивая окном).в случае 5 ого задания я установил событие на родительский элемент ul, а в 3 ем задании событие установлено на document который по DOM дереву находится выше по иерархии, чем UL элемент и является для элемента UL прородителем.
+
+        // 7. С помощью JS необходимо изменить цвет заднего фона каждого второго тега li.
+
+        const allLiElements = document.querySelectorAll('li');
+        let indexLi = 1;
+        allLiElements.forEach(element => {
+            // element.classList.add('background');
+            if (indexLi % 2 == 0) {
+                element.style.backgroundColor = 'red';
+            }
+            indexLi++;
+        });
+    </script>
+</body>
+
+</html>
