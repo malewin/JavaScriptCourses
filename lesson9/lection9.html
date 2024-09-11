@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lection 9</title>
+    <style>
+        .rating_sign_input {
+            display: none;
+        }
+        
+        .check {
+            color: goldenrod;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="form">
+        <label><input type="radio" name="propagation-control" value="stopPropagation">Stop propagation</label>
+        <label><input type="radio" name="propagation-control" value="stopImmediatePropagation">Stop Immediate propagation</label>
+    </form>
+
+    <ul>
+        <li>Первый</li>
+        <li>Второй</li>
+        <li>Третий</li>
+    </ul>
+    <!-- example2 -->
+    <form action="#" class="formChecked">
+        <h2>Форма</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat id a sit in aspernatur? Quod distinctio neque molestiae deserunt repudiandae rerum error! Ea possimus ullam alias ducimus ut sed quae?</p>
+        <input type="checkbox" id="checkbox" class="check">
+        <label for="checkbox">
+        Согласен с условиями
+    </label>
+        <div class="error"></div>
+        <button type="submit">Отправить</button>
+    </form>
+
+    <!-- example 3 -->
+    <button class="mouseClick">Click it!</button>
+
+    <!-- example 4 -->
+    <form action="city.html" class="formCityChoice">
+        <div>
+            <label for="select">Город</label>
+            <select name="select" id="select" class="select">
+                <option value="city" class="option">Выберите город</option>
+                <option value="Krasnodar" class="option">Краснодар</option>
+                <option value="Rostov" class="option">Ростов</option>
+                <option value="Stavropol" class="option">Ставрополь</option>
+                <option value="Sochi" class="option">Сочи</option>
+                <option value="Maykop" class="option">Майкоп</option>
+            </select>
+        </div>
+        <button type="submit" class="button">Отправить</button>
+    </form>
+    <br>
+    <br>
+
+    <!-- example 5 -->
+    <script src="https://kit.fontawesome.com/f1fececfdc.js" crossorigin="anonymous"></script>
+    <form action="#" class="formRating">
+        <h1>Rating</h1>
+        <div class="rating">
+            <div class="rating_sign">
+                <label for="1" class="rating_sign_label"><i class="fa-solid fa-star fa-2xl" ></i></label>
+                <input type="radio" name="rating" id="1" value="1" class="rating_sign_input">
+            </div>
+            <div class="rating_sign">
+                <label for="2" class="rating_sign_label"><i class="fa-solid fa-star fa-2xl" ></i></label>
+                <input type="radio" name="rating" id="2" value="2" class="rating_sign_input">
+            </div>
+            <div class="rating_sign">
+                <label for="3" class="rating_sign_label"><i class="fa-solid fa-star fa-2xl" ></i></label>
+                <input type="radio" name="rating" id="3" value="3" class="rating_sign_input">
+            </div>
+            <div class="rating_sign">
+                <label for="4" class="rating_sign_label"><i class="fa-solid fa-star fa-2xl" ></i></label>
+                <input type="radio" name="rating" id="4" value="4" class="rating_sign_input">
+            </div>
+            <div class="rating_sign">
+                <label for="5" class="rating_sign_label"><i class="fa-solid fa-star fa-2xl" ></i></label>
+                <input type="radio" name="rating" id="5" value="5" class="rating_sign_input">
+            </div>
+        </div>
+    </form>
+    <script>
+        // //example1
+        // const form = document.querySelector('.form');
+        // const list = document.querySelector('ul');
+        // list.addEventListener('click', (e) => {
+        //     console.log('В первом UL в фазе захвата');
+        //     const propagationControlMethodName = form.elements['propagation-control'].value;
+        //     console.log(propagationControlMethodName);
+        //     if (propagationControlMethodName) {
+        //         e[propagationControlMethodName]()
+        //     }
+        // }, true);
+        // list.addEventListener('click', () => {
+        //     console.log('Во втором UL в фазе захвата')
+        // }, true);
+        // list.addEventListener('click', () => {
+        //     console.log('В первом UL в фазе вспылтия')
+        // }, true);
+        // Array.from(list.children).forEach((child) => {
+        //     child.addEventListener('click', () => {
+        //         console.log('В каждом LI в фазе вспылтия');
+        //     });
+        // })
+
+        // //example2
+        // // stop-action if not agree-checkbox
+
+        // const inputEl = document.querySelector('.check');
+        // const formCheckEl = document.querySelector('.formChecked');
+        // const errorEl = formCheckEl.querySelector('.error');
+        // inputEl.addEventListener('click', function(e) {
+        //     const target = e.target;
+        //     console.log(target.checked);
+        // });
+        // formCheckEl.addEventListener('submit', function(e) {
+        //     if (inputEl.checked) {
+        //         console.log('Отправлено');
+        //     } else {
+        //         errorEl.textContent = 'Вы не согласились с условиями!';
+        //         errorEl.style.color = 'red';
+        //         e.preventDefault();
+        //     }
+        // });
+
+        // //example 3
+        // const eventOptions = {
+        //     bubbles: true,
+        //     cancelable: true
+        // };
+        // const event = new Event('click', eventOptions)
+        // event.view = window;
+
+        // const mouseEvent = new MouseEvent('click', {
+        //     ...eventOptions,
+        //     view: window,
+        // });
+
+        // document.addEventListener('click', (event) => {
+        //     console.log(event.isTrusted);
+        // });
+
+        // const buttonMouse = document.querySelector('.mouseClick');
+        // buttonMouse.dispatchEvent(event);
+        // buttonMouse.dispatchEvent(mouseEvent);
+        // buttonMouse.click();
+
+        //example 4
+        // add class-stoper by click if not choice
+
+        // const formCityEl = document.querySelector('.formCityChoice');
+        // const selectEl = formCityEl.querySelector('.select');
+        // const btnCitySubmit = formCityEl.querySelector('.button');
+
+        // document.addEventListener('click', function(e) {
+        //     console.log(selectEl.value);
+        //     e.preventDefault();
+        //     if (selectEl.value === 'city') {
+        //         selectEl.classList.add('select_error');
+        //     } else {
+        //         selectEl.classList.remove('select_error');
+        //         return
+        //     }
+        // });
+
+        // example 5
+        // rating
+
+        const form = document.querySelector('.formRating');
+        const buttonS = form.querySelectorAll('.rating_sign_input');
+
+        const itemsForFlex = document.querySelector('.rating');
+        itemsForFlex.setAttribute('class', 'dflex');
+        itemsForFlex.style.display = 'flex';
+        const itemStarBox = itemsForFlex.querySelectorAll('.rating_sign');
+        itemStarBox.forEach(element => {
+            element.style.display = 'grid';
+            element.style.marginRight = '10px';
+        });
+
+        buttonS.forEach((radio) => {
+            radio.addEventListener('change', function() {
+                const checkedNumber = document.querySelector('.rating_sign_input:checked').value || undefined;
+
+                buttonS.forEach((item) => {
+                    const currentLabel = item.previousElementSibling;
+                    if (item.value <= checkedNumber) {
+                        currentLabel.classList.add('check');
+                    } else {
+                        currentLabel.classList.remove('check');
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+
+</html>
