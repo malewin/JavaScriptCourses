@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <title>seminar11</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="content_box"></div>
+
+    <script src="./data.js"></script>
+    <script>
+        const data = JSON.parse(dataProducts);
+        console.log(data);
+
+        const items = document.querySelector('.content_box');
+
+        data.forEach(element => {
+            const item = document.createElement('div');
+            const itemImg = document.createElement('img');
+            const itemContent = document.createElement('div');
+            const contentDesc = document.createElement('div');
+            const crossImg = document.createElement('img');
+            const descName = document.createElement('h3');
+            const descPrice = document.createElement('p');
+            const descPriceAmount = document.createElement('span');
+            const descColor = document.createElement('p');
+            const descSize = document.createElement('p');
+            const descQuantity = document.createElement('p');
+
+            item.setAttribute('class', 'item_box');
+            itemImg.setAttribute('class', 'item_box_img');
+            itemImg.setAttribute('src', `${element.urlImg}`);
+            itemContent.setAttribute('class', 'item_box_content');
+            contentDesc.setAttribute('class', 'item_box_content_desc');
+            crossImg.classList.add('cross');
+
+            itemImg.src = `${element.urlImg}`;
+            descName.textContent = `${element.name}`;
+            descPriceAmount.textContent = `${element.price}`
+            descPrice.textContent = `Price: `;
+            descColor.textContent = `Color: ${element.color}`;
+            descSize.textContent = `Size: ${element.size}`;
+            crossImg.src = `./img/vector.png`;
+            descQuantity.textContent = `Quantity: `;
+
+            contentDesc.appendChild(descName);
+            descPrice.appendChild(descPriceAmount);
+            contentDesc.appendChild(descPrice);
+            contentDesc.appendChild(descColor);
+            contentDesc.appendChild(descSize);
+            contentDesc.appendChild(descQuantity);
+            itemContent.appendChild(contentDesc);
+            itemContent.appendChild(crossImg);
+            item.appendChild(itemImg);
+            item.appendChild(itemContent);
+            item.appendChild(crossImg);
+
+            items.appendChild(item);
+        });
+    </script>
+</body>
+
+</html>
