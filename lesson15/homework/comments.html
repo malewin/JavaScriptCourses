@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>commentsWall</title>
+</head>
+<body style="display: flex;flex-direction: column;align-items: center;gap: 30px;background-color: black;">
+    <h1 style="color: white;">Оставьте ваш отзыв</h1>
+    <input class="userComment" placeholder="Введите текст" style="width: 300px;height: 200px; text-align: center;font-size: 24px;" type="text" required>
+    <button class="btn" type="submit">Оставить отзыв</button>
+    <div class="commentsWall" style="border: 1px solid white;width: 425px;height: 600px;box-sizing: border-box;overflow: scroll;background: rgb(213, 203, 203); padding-left: 10px;"></div>
+    <script src="./comments.js"></script>
+</body>
+</html>
