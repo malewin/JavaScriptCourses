@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>createReview</title>
+</head>
+<body>
+    <div class="content" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <div class="choicePage" style="display: flex; gap: 30px;">
+            <a href="#"><button>Оставить отзыв</button></a>
+            <a href="./showReviews.html"><button>Все отзывы</button></a>
+        </div>
+        <h2>Оставьте отзыв о товаре</h2>
+        <input id="model" type="text" required placeholder="Введите название продукта" style="width: 300px;text-align: center;">
+        <textarea id="review" required placeholder="Введите ваш отзыв" style="width: 300px;height: 100px;text-align: center;"></textarea>
+        <button class="addBtn">Добавить отзыв</button>
+    </div>
+    <script>
+        const productInput = document.querySelector('#model');
+        const reviewInput = document.querySelector('#review');
+        const sBtn = document.querySelector('.addBtn');
+
+        sBtn.addEventListener('click', () => {
+            const product = productInput.value.trim();
+            const review = reviewInput.value.trim();
+            if (product && review) {
+                const existingReviews = JSON.parse(localStorage.getItem(product)) || [];
+                existingReviews.push(review);
+                localStorage.setItem(product, JSON.stringify(existingReviews));
+                alert('Ваш отзыв успешно добавлен на страницу просмотра отзывов!');
+
+                // Очистить поля ввода
+                productInput.value = '';
+                reviewInput.value = '';
+            } else {
+                alert('Пожалуйста, заполните все поля.');
+            }
+        });
+        // localStorage.clear();
+    </script>
+</body>
+</html>

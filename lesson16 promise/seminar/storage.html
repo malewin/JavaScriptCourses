@@ -1,0 +1,64 @@
+<!-- Создать интерактивную веб-страницу, где пользователи могут вводить текст, сохранять его в localStorage, a затем загружать или удалять сохраненные данные.
+Разработка Интерфейса:
+Создать HTML-страницу с:
+• Одним текстовым полем для ввода данных пользователем.
+Тремя кнопками: "Сохранить", "Загрузить" и "Очистить".
+• Местом для отображения сохраненного текста.
+Программирование Логики на JavaScript:
+1. При нажатии на "Сохранить", введенный текст должен сохраняться в localStorage.
+2. При нажатии на "Загрузить", текст из localStorage должен отображаться на странице.
+3. При нажатии на "Очистить", сохраненный текст должен быть удален из localStorage, и соответствующее
+сообщение отображается на странице. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage</title>
+</head>
+<body>
+    <input class="userData" type="text" required>
+    <button class="saveBtn">Сохранить</button>
+    <button class="loadBtn">Загрузить</button>
+    <button class="deleteBtn">Удалить</button>
+    <div class="dataWall"></div>
+    <script>
+        const inp = document.querySelector('.userData');
+        const sBtn = document.querySelector('.saveBtn');
+        const lBtn = document.querySelector('.loadBtn');
+        const dBtn = document.querySelector('.deleteBtn');
+        const wall = document.querySelector('.dataWall');
+
+        sBtn.addEventListener('click', () => {
+            let dataValue = inp.value;
+            if (dataValue) {
+                // Сохраняем текст в LocalStorage
+                localStorage.setItem('userData', dataValue);
+                inp.value = ''; // очищаем поле ввода
+                alert('Данные сохранены!');
+            } else {
+                alert('Введите текст для сохранения.');
+            }
+        });
+
+        lBtn.addEventListener('click', () => {
+            // Загружаем текст из LocalStorage
+            const data = localStorage.getItem('userData');
+            if (data) {
+                const newData = document.createElement('p');
+                newData.textContent = `Сохраненные данные: ${data}`;
+                wall.appendChild(newData); 
+            } else {
+                alert('Нет данных для загрузки.');
+            }
+        });
+
+        dBtn.addEventListener('click', () => {
+            // Удаляем текст из LocalStorage
+            localStorage.removeItem('userData');
+            wall.textContent = 'Данные очищены!';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>showReviews</title>
+</head>
+<body>
+    <div class="content" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <div class="choicePage" style="display: flex; gap: 30px;">
+            <a href="./createReview.html"><button>Оставить отзыв</button></a>
+            <a href="#"><button>Все отзывы</button></a>
+        </div>
+        <h1>Отзывы</h1>
+        <div class="reviewsWall"></div>
+    </div>
+    <script>
+        const wall = document.querySelector('.reviewsWall');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const products = Object.keys(localStorage);
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                const productTitle = document.createElement('h3');
+                const reviewsList = document.createElement('div');
+                const reviews = JSON.parse(localStorage.getItem(product));
+
+                productTitle.textContent = product;
+                productDiv.style.cursor = 'pointer';
+                reviewsList.style.display = 'none'; // Скрываем список отзывов по умолчанию
+
+                productDiv.appendChild(productTitle);
+                wall.appendChild(productDiv);
+
+                productTitle.addEventListener('click', () => {
+                    reviewsList.style.display = reviewsList.style.display === 'none' ? 'block' : 'none';
+                    if (reviewsList.innerHTML === '') {
+                        reviews.forEach((review, index) => {
+                            const reviewDiv = document.createElement('div');
+                            const reviewText = document.createElement('p');
+                            const deleteBtn = document.createElement('button');
+
+                            reviewText.textContent = review;
+                            deleteBtn.textContent = 'Удалить';
+                            deleteBtn.addEventListener('click', () => {
+                                reviews.splice(index, 1); // Удаляем отзыв из массива
+                                localStorage.setItem(product, JSON.stringify(reviews)); // Обновляем localStorage
+                                wall.removeChild(productDiv); // Удаляем продукт из отображения
+                                displayProducts(); // Обновляем отображение
+                            });
+
+                            reviewDiv.appendChild(reviewText);
+                            reviewDiv.appendChild(deleteBtn);
+                            reviewsList.appendChild(reviewDiv);
+                        });
+                    }
+                });
+
+                productDiv.appendChild(reviewsList);
+            });
+        });
+    </script>
+</body>
+</html>
+
