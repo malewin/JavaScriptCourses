@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily photo</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .info {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        .like-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .like-count {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="image-container">
+        <img id="randomImage" src="" alt="Случайное изображение">
+        <div class="info" id="photoInfo"></div>
+        <button class="like-button" id="likeButton">Like</button>
+        <div class="like-count" id="likeCount">Summary likes: <span id="likeCounter">0</span></div>
+    </div>
+
+    <script>
+        const clientId = "CTQyENjJRgRvrT5uzaPya_uhl6GOfnTvzAayjB0iz_s"; 
+        const imageElement = document.getElementById("randomImage");
+        const photoInfo = document.getElementById("photoInfo");
+        const likeButton = document.getElementById("likeButton");
+        const likeCounter = document.getElementById("likeCounter");
+
+        let likes = localStorage.getItem("likes") ? parseInt(localStorage.getItem("likes")) : 0;
+
+        async function loadRandomImage() {
+            const response = await fetch(`https://api.unsplash.com/photos/random/?client_id=${clientId}`);
+            const data = await response.json();
+
+            imageElement.src = data.urls.small;
+            photoInfo.innerHTML = `Photo: <a href="${data.links.html}" target="_blank">${data.user.name}</a>`;
+        }
+
+        likeCounter.innerText = likes;
+
+        likeButton.addEventListener("click", () => {
+            likes++;
+            likeCounter.innerText = likes;
+            localStorage.setItem("likes", likes);
+        });
+
+        loadRandomImage();
+    </script>
+</body>
+</html>
