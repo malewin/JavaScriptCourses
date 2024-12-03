@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание занятий</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Расписание занятий</h1>
+        <div id="classesArea" class="mt-4"></div>
+    </div>
+
+    <script>
+        const classesData = [
+            {
+                "title": "Самбо",
+                "time": "09:00 - 11:00",
+                "maxParticipants": 15,
+                "currentParticipants": 10
+            },
+            {
+                "title": "Плавание",
+                "time": "10:15 - 11:45",
+                "maxParticipants": 10,
+                "currentParticipants": 5
+            },
+            {
+                "title": "Танцы",
+                "time": "11:30 - 12:50",
+                "maxParticipants": 20,
+                "currentParticipants": 20
+            }
+        ];
+
+        function updateClasses() {
+            const classesArea = document.getElementById('classesArea');
+            classesArea.innerHTML = '';
+
+            classesData.forEach((classItem, index) => {
+                const card = document.createElement('div');
+                card.className = 'card mb-3';
+                card.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">${classItem.title}</h5>
+                        <p>Время: ${classItem.time}</p>
+                        <p>Макс. участников: ${classItem.maxParticipants}</p>
+                        <p>Записанные участники: ${classItem.currentParticipants}</p>
+                        <button class="btn btn-primary" id="registerBtn${index}">${classItem.currentParticipants < classItem.maxParticipants ? 'Записаться' : 'Мест нет'}</button>
+                        <button class="btn btn-danger" id="cancelBtn${index}" ${classItem.currentParticipants > 0 ? '' : 'disabled'}>Отменить запись</button>
+                    </div>
+                `;
+                classesArea.appendChild(card);
+
+                const registerBtn = card.querySelector(`#registerBtn${index}`);
+                const cancelBtn = card.querySelector(`#cancelBtn${index}`);
+
+                registerBtn.addEventListener('click', () => {
+                    if (classItem.currentParticipants < classItem.maxParticipants) {
+                        classItem.currentParticipants++;
+                        updateClasses();
+                    }
+                });
+
+                cancelBtn.addEventListener('click', () => {
+                    if (classItem.currentParticipants > 0) {
+                        classItem.currentParticipants--;
+                        updateClasses();
+                    }
+                });
+            });
+        }
+
+        updateClasses();
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task3</title>
+
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg,rgb(240, 3, 240),rgb(0, 187, 255));
+            border: 2px black solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        .grid{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+    </style>
+</head>
+<body>
+    <button class="addBtn">
+        Добавить элемент
+    </button>
+    <button class="delBtn">
+        Удалить элемент
+    </button>
+    <button class="copyBtn">
+        Копировать элемент
+    </button>
+    <div class="squaresArr"></div>
+
+    <script>
+        const addBtn = document.querySelector('.addBtn');
+        const delBtn = document.querySelector('.delBtn');
+        const copyBtn = document.querySelector('.copyBtn');
+        const area = document.querySelector('.squaresArr');
+
+        let count = 1;
+
+        addBtn.addEventListener('click', () => {
+            const square = document.createElement('div');
+            const counter = document.createElement('p');
+            counter.classList.add('text');
+            counter.textContent = count;
+            square.classList.add('box');
+            square.appendChild(counter);
+            area.classList.add('grid');
+            area.appendChild(square);
+            count++;
+        });
+
+        delBtn.addEventListener('click', () => {
+            const lastBox = area.lastChild; // Получаем последний элемент
+            if (lastBox) {
+                const counterValue = lastBox.querySelector('.text').textContent; // Получаем значение p
+
+                // Проверяем, есть ли другой элемент с таким же значением
+                const existingBoxes = Array.from(area.querySelectorAll('.box')).filter(box => {
+                    return box.querySelector('.text').textContent === counterValue;
+                });
+
+                // Если других таких элементов не осталось, уменьшаем   счетчик
+                if (existingBoxes.length === 1) {
+                    count--;
+                }
+
+                area.removeChild(lastBox);
+            }   
+        });
+
+        copyBtn.addEventListener('click', () => {
+            const lastBox = area.lastChild; // Получаем последний элемент
+            if (lastBox) { // Проверяем, есть ли элементы для копирования
+                const newSquare = lastBox.cloneNode(true); // Создаем его копию
+                area.appendChild(newSquare); // Добавляем копию в область
+            }
+        });
+    </script>
+</body>
+</html>
