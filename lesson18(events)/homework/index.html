@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web-slider</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            height: 100vh;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .slider-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        .slider-image {
+            display: none; /* Скрытие изображений */
+            width: 100%;
+        }
+        .active {
+            display: block; /* Показывать только активное изображение */
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1;
+            font-size: 20px;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+        .nav-dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .nav-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: lightgray;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .active-dot {
+            background-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>NFT of TON-blockchain</h1>
+    <div class="slider-container">
+        <img src="./img/anon_number.png" alt="Image 1" class="slider-image active">
+        <img src="./img/domain.png" alt="Image 2" class="slider-image">
+        <img src="./img/username.png" alt="Image 3" class="slider-image">
+
+        <button class="nav-button prev">❮</button>
+        <button class="nav-button next">❯</button>
+    </div>
+    <div class="nav-dots"></div>
+
+    <script>
+        const images = document.querySelectorAll('.slider-image');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        const navDotsContainer = document.querySelector('.nav-dots');
+
+        let currentIndex = 0;
+
+        // Инициализация навигационных точек
+        images.forEach((image, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            dot.addEventListener('click', () => goToSlide(index));
+            navDotsContainer.appendChild(dot);
+        });
+
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        function updateSlider() {
+            images.forEach((image, index) => {
+                image.classList.remove('active');
+                navDots[index].classList.remove('active-dot');
+            });
+            images[currentIndex].classList.add('active');
+            navDots[currentIndex].classList.add('active-dot');
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+            updateSlider();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+            updateSlider();
+        });
+
+        updateSlider(); // Инициализация слайдера
+    </script>
+</body>
+</html>
+
